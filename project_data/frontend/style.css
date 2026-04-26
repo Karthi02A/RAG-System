@@ -1,0 +1,410 @@
+/* DataForge AI - Premium Sky Blue Theme */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;700&display=swap');
+
+:root {
+    --bg-pure: #000000;
+    --bg-card: #111111;
+    --accent-sky: #38BDF8;
+    --accent-light: #7DD3FC;
+    --text-main: #E5E7EB;
+    --text-secondary: #9CA3AF;
+    --border-subtle: #1F2937;
+    --border-accent: rgba(56, 189, 248, 0.3);
+}
+
+/* Base resets - Full width focus */
+.stApp {
+    background-color: var(--bg-pure);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+}
+
+.main > div {
+    max-width: 100% !important;
+    padding: 2rem 5% !important;
+}
+
+/* Rounded Pill Title */
+.main-title-container {
+    text-align: center;
+    margin: 3rem 0 1rem 0;
+    width: 100%;
+}
+
+.main-title {
+    display: inline-block;
+    border: 2px solid var(--accent-sky);
+    border-radius: 50px;
+    padding: 1rem 5rem;
+    font-size: clamp(2.5rem, 10vw, 4rem);
+    font-weight: 800;
+    color: var(--accent-sky);
+    font-family: 'Outfit', sans-serif;
+    background: transparent;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+}
+
+/* AI Branding Image Container */
+.brand-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.brand-image-glow {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, var(--accent-sky) 0%, var(--accent-light) 50%, transparent 70%);
+    filter: blur(60px);
+    opacity: 0.3;
+    z-index: 0;
+}
+
+.brand-image-img {
+    max-width: 400px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 0 25px rgba(56, 189, 248, 0.4));
+}
+
+/* Card Design */
+.df-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.df-card:hover {
+    border-color: var(--accent-sky);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.1);
+}
+
+/* Pill Section Headers - Boxed Style */
+.heading-box {
+    display: block;
+    width: fit-content;
+    margin: 4rem auto 2rem auto;
+    border: 1.5px solid var(--accent-sky);
+    border-radius: 40px;
+    padding: 0.8rem 4rem;
+    text-align: center;
+    background: rgba(56, 189, 248, 0.05); /* Very subtle glow */
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2);
+}
+
+.heading-box h2 {
+    font-size: clamp(1.5rem, 5vw, 2.2rem) !important;
+    color: var(--accent-sky) !important;
+    margin: 0 !important;
+}
+
+/* Topic Headers - Boxed Style */
+.topic-box {
+    background: #0D0D0D;
+    border: 1px solid var(--border-subtle);
+    padding: 15px 25px;
+    border-radius: 12px;
+    margin: 2rem 0 1rem 0;
+    border-left: 5px solid var(--accent-sky);
+}
+
+/* Score Pill */
+.score-box {
+    display: block;
+    width: fit-content;
+    min-width: 320px;
+    margin: 2rem auto;
+    border: 2px solid var(--accent-light);
+    border-radius: 24px;
+    padding: 2rem;
+    text-align: center;
+    background: rgba(125, 211, 252, 0.03);
+    box-shadow: 0 0 40px rgba(56, 189, 248, 0.1);
+}
+
+/* Main Button Styling - Hover Only Highlights */
+div.stButton > button {
+    width: 100%;
+    background-color: #111111 !important;
+    color: var(--accent-sky) !important;
+    border: 1.5px solid var(--accent-sky) !important;
+    border-radius: 12px !important;
+    padding: 1rem 0 !important;
+    font-weight: 600 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+div.stButton > button:hover {
+    background-color: var(--accent-sky) !important;
+    color: #000000 !important;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.4) !important;
+    transform: translateY(-2px);
+}
+
+/* Force dark state for active/primary to prevent permanent blue highlight */
+div.stButton > button[kind="primary"], 
+div.stButton > button:focus, 
+div.stButton > button:active {
+    background-color: #111111 !important;
+    color: var(--accent-sky) !important;
+    border: 1.5px solid var(--accent-sky) !important;
+    box-shadow: none !important;
+}
+
+div.stButton > button[kind="primary"]:hover,
+div.stButton > button:focus:hover,
+div.stButton > button:active:hover {
+    background-color: var(--accent-sky) !important;
+    color: #000000 !important;
+}
+
+/* KPI Metrics Row */
+.kpi-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+    width: 100%;
+}
+
+.kpi-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-accent);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    min-width: 180px;
+    flex: 1;
+    max-width: 250px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.kpi-card:hover {
+    border-color: var(--accent-sky);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(56, 189, 248, 0.2);
+}
+
+.kpi-label {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+.kpi-value {
+    color: var(--accent-sky);
+    font-size: 1.8rem;
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+}
+
+/* Footer Control */
+.footer {
+    text-align: center;
+    padding: 5rem 1rem;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border-subtle);
+    margin-top: 6rem;
+}
+
+/* Hero Section Styling */
+.hero-container {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    background-image: url('data_science_hero_bg.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    margin-bottom: 3rem;
+    padding: 0 2rem;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.9), 0 0 40px rgba(56, 189, 248, 0.4);
+}
+
+.hero-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.5), rgba(0,0,0,0.8));
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+}
+
+/* Hero Title Box - Animated Highlight */
+@keyframes sweep {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes pulse-glow {
+    0% { box-shadow: 0 0 15px rgba(56, 189, 248, 0.2); border-color: rgba(56, 189, 248, 0.3); }
+    50% { box-shadow: 0 0 30px rgba(56, 189, 248, 0.5); border-color: rgba(56, 189, 248, 0.8); }
+    100% { box-shadow: 0 0 15px rgba(56, 189, 248, 0.2); border-color: rgba(56, 189, 248, 0.3); }
+}
+
+.hero-title-box {
+    position: relative;
+    display: inline-block;
+    padding: 0.8rem 4rem;
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid var(--accent-sky);
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    animation: pulse-glow 3s infinite ease-in-out;
+    box-shadow: 0 0 30px rgba(56, 189, 248, 0.4); /* Enhanced consistent shadow */
+}
+
+.hero-title-box::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.3), transparent);
+    animation: sweep 4s infinite linear;
+}
+
+.hero-title {
+    font-size: clamp(3rem, 10vw, 4.5rem);
+    font-weight: 800;
+    color: var(--accent-sky);
+    margin: 0 !important;
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -1px;
+    text-shadow: 0 0 40px rgba(56, 189, 248, 0.5);
+    position: relative;
+    z-index: 3;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    font-weight: 600;
+    color: var(--accent-light);
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.hero-description {
+    font-size: clamp(0.9rem, 2vw, 1.15rem);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+}
+
+/* Ensure metrics and cards stay readable */
+.stMetric {
+    background-color: #111111;
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid #1F2937;
+}
+
+/* Dashboard chart section spacing */
+.stSelectbox label {
+    color: #9CA3AF !important;
+    font-size: 0.85rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Plotly chart container overrides */
+.js-plotly-plot .plotly .main-svg {
+    border-radius: 12px;
+}
+
+/* 🚀 FINAL STABLE MOBILE FITNESS (Horizontal + Legible + Tight) */
+@media (max-width: 768px) {
+    /* 1. Force Horizontal + Enable Swiping (GLOBAL) */
+    div[data-testid="stHorizontalBlock"] {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important; 
+        -webkit-overflow-scrolling: touch;
+        gap: 15px !important;
+        padding-bottom: 12px !important;
+        width: 100% !important;
+        align-items: flex-start !important;
+    }
+
+    /* 2. EXCEPTION: FIXED BOXES (No columns in Python = Already stationary) */
+    div[data-testid="stHorizontalBlock"]:has(div[data-testid="stFileUploader"]) {
+        display: block !important;
+        overflow: visible !important;
+    }
+
+    /* 3. MOBILE-FIT SIZING (280px Global Peek UX) */
+    div[data-testid="column"] {
+        flex: 0 0 auto !important;
+        min-width: 280px !important; /* THE GOLDILOCKS PEEK SIZE */
+        width: auto !important;
+        margin-right: 15px !important;
+    }
+
+    /* 4. COMPACT MOBILE CARDS (Remove wasted space) */
+    .df-card, .score-box, .kpi-card, .stMetric, [data-testid="stMetricValue"] {
+        padding: 0.8rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+
+    /* 5. LOGO FIT (Shrink to avoid cutting) */
+    .hero-title {
+        font-size: 2.4rem !important; /* Shrink logo for better fit */
+        text-align: center !important;
+    }
+
+    /* 6. MEDIUM FONTS (16px) - Perfect for "Sight" */
+    button, p, span, label, div, h1, h2, h3 {
+        font-size: 16px !important;
+    }
+
+    /* 7. Fit Dataframe & Charts */
+    div[data-testid="stDataFrame"], .stPlotlyChart {
+        width: 100% !important;
+        overflow-x: auto !important;
+    }
+
+    /* Hide scrollbars for a clean look */
+    div[data-testid="stHorizontalBlock"]::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+/* 🕶️ HIDE STREAMLIT FOOTER & GITHUB TOOLBAR */
+header { display: none !important; }
+footer { display: none !important; }
+#MainMenu { display: none !important; }
+[data-testid="stHeader"] { display: none !important; }
+[data-testid="stToolbar"] { display: none !important; }
+
