@@ -151,6 +151,27 @@ st.markdown("""
         color: #FF3131 !important;
         margin-top: 25px !important;
     }
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+        .main-header {
+            font-size: 2.2rem !important;
+            letter-spacing: -1px !important;
+        }
+        .sub-header {
+            font-size: 1rem !important;
+        }
+        .header-section {
+            padding: 20px !important;
+            margin-bottom: 20px !important;
+        }
+        [data-testid="stChatMessage"] {
+            width: 98% !important;
+            padding: 15px !important;
+        }
+        [data-testid="stChatMessage"] div[data-testid="stMarkdownContainer"] p {
+            font-size: 16px !important;
+        }
+    }
     </style>
 """, unsafe_allow_html=True)
 
