@@ -101,6 +101,6 @@ metas = [{"source": c["source"]} for c in chunks]
 if chunks:
     db = FAISS.from_texts(texts, embeddings, metadatas=metas)
     db.save_local("vector_store")
-    print("✅ Vector DB updated successfully in 'vector_store'")
+    print("[SUCCESS] Vector DB updated successfully in 'vector_store'")
 else:
-    print("❌ No chunks generated. Vector DB not updated.")
+    print("[ERROR] No chunks generated. Vector DB not updated.")
