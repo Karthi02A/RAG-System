@@ -69,8 +69,8 @@ for doc in documents:
         try:
             splitter = RecursiveCharacterTextSplitter.from_language(
                 language=lang,
-                chunk_size=512,
-                chunk_overlap=128
+                chunk_size=1000,
+                chunk_overlap=200
             )
         except Exception as e:
             print(f"Warning: Could not create language splitter for {lang}: {e}")
@@ -78,8 +78,8 @@ for doc in documents:
             
     if not splitter:
         splitter = RecursiveCharacterTextSplitter(
-            chunk_size=512,
-            chunk_overlap=128
+            chunk_size=1000,
+            chunk_overlap=200
         )
     
     parts = splitter.split_text(doc["content"])

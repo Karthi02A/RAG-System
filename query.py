@@ -35,17 +35,16 @@ def ask(query):
         return {"error": "Vector store not found. Please run ingest.py first."}
 
     # Similarity search with scores - Increasing context for better coverage
-    docs_and_scores = db.similarity_search_with_score(query, k=6)
+    docs_and_scores = db.similarity_search_with_score(query, k=10)
     
-    # Filter by score (lower score is better for FAISS Euclidean distance)
-    # Final Threshold: 1.7 ensures we catch small files like Dockerfile while still being accurate.
+    # Final Threshold: 2.2 ensures broader retrieval for complex technical queries.
     relevant_docs = []
     best_score = float('inf')
     
     for doc, score in docs_and_scores:
         if score < best_score:
             best_score = score
-        if score < 1.7:
+        if score < 2.2:
             relevant_docs.append(doc)
 
     if not relevant_docs:
@@ -119,25 +118,6 @@ ANSWER:
         }
     except Exception as e:
         return {"error": f"Error calling LLM: {e}"}
-
-if __name__ == "__main__":
-    print("--- Project Chatbot (type 'exit' to quit) ---")
-    while True:
-        user_input = input("\nAsk your project: ")
-        if user_input.lower() == 'exit':
-            break
-        
-        result = ask(user_input)
-        if "error" in result:
-            print(f"\n❌ {result['error']}")
-        elif "answer" in result:
-            print("\n" + "="*30)
-            print("ANSWER:")
-            print(result["answer"])
-            if result["sources"]:
-                print("-" * 10)
-                print("SOURCES:", ", ".join(result["sources"]))
-            print("="*30)
 
 # Run loop
 if __name__ == "__main__":

@@ -31,7 +31,7 @@ st.markdown("""
         color: #E0E0E0;
     }
     
-    /* Premium Chat Bubbles */
+    /* Premium Chat Bubbles Base */
     [data-testid="stChatMessage"] {
         border-radius: 16px;
         padding: 24px;
@@ -40,26 +40,28 @@ st.markdown("""
         background: rgba(255, 255, 255, 0.015);
         backdrop-filter: blur(10px);
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        width: 80% !important;
+        width: 85% !important;
     }
     
-    /* User Message (Right Aligned) - Usually Odd (1, 3, 5...) */
-    [data-testid="stChatMessage"]:nth-child(odd) {
+    /* User Message (Right Aligned) - Detected by custom avatar image */
+    [data-testid="stChatMessage"]:has(img) {
         flex-direction: row-reverse !important;
         background: rgba(245, 245, 220, 0.05) !important;
         border-right: 3px solid #FF3131 !important;
         border-left: none !important;
         margin-left: auto !important;
         margin-right: 0px !important;
+        text-align: right;
     }
     
-    /* Assistant Message (Left Aligned) - Usually Even (2, 4, 6...) */
-    [data-testid="stChatMessage"]:nth-child(even) {
+    /* Assistant Message (Left Aligned) - Detected by absence of custom avatar image */
+    [data-testid="stChatMessage"]:not(:has(img)) {
         background: rgba(245, 245, 220, 0.05) !important;
         border-left: 3px solid #F5F5DC !important;
         border-right: none !important;
         margin-right: auto !important;
         margin-left: 0px !important;
+        text-align: left;
     }
 
     /* Centered Header Section */
