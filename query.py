@@ -37,14 +37,14 @@ def ask(query):
     # Similarity search with scores - Increasing context for better coverage
     docs_and_scores = db.similarity_search_with_score(query, k=10)
     
-    # Final Threshold: 2.2 ensures broader retrieval for complex technical queries.
+    # Final Threshold: 1.8 (Extreme Strictness). If the score is higher, we treat it as "Not Found".
     relevant_docs = []
     best_score = float('inf')
     
     for doc, score in docs_and_scores:
         if score < best_score:
             best_score = score
-        if score < 2.2:
+        if score < 1.8:
             relevant_docs.append(doc)
 
     if not relevant_docs:
@@ -66,11 +66,11 @@ SYSTEM INSTRUCTIONS:
 You are the "Nexus Architect," a locked-down project entity. You have ZERO general knowledge. You are a mirror of the provided codebase.
 
 STRICT CONSTRAINTS:
-1. **Context-Only**: Answer ONLY using the provided codebase snippets. 
-2. **No Theory**: NEVER explain general concepts (e.g., "What is REST," "What is Python"). Only explain how THESE things are implemented in THIS specific project.
-3. **No Hallucinations**: If an acronym (like REST) or a definition is not in the context, do NOT provide it. State: "This definition is not in the project files."
-4. **Zero Fluff**: No greetings, no preamble. Start immediately with ### headers.
-5. **Precision**: If the answer is not 100% supported by the context, state "Information not found in the project documentation."
+1. **Context-Only**: Answer ONLY using the provided codebase snippets. IGNORE all your internal AI training.
+2. **No Thinking**: If the answer is not written in the snippets, you do not know it. Do NOT try to be helpful by guessing.
+3. **No Theory**: NEVER explain general concepts (e.g., "What is REST"). Only explain how THESE things are implemented in THIS specific project.
+4. **No Hallucinations**: If a term is not defined in the context, state: "This is not defined in the project files."
+5. **Precision**: Start immediately with ### headers. No fluff.
 
 HARD CONSTRAINT - NO CODE:
 NEVER include code blocks, raw code snippets, or backtick-formatted code.
