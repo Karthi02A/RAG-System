@@ -1,10 +1,17 @@
 import streamlit as st
 import os
+import time
 from query import ask
 from dotenv import load_dotenv
+from keep_alive import start_keep_alive
 
 # Load env variables
 load_dotenv()
+
+# --- KEEP ALIVE: Start once per app session (prevents Streamlit Cloud sleep) ---
+if "keep_alive_started" not in st.session_state:
+    start_keep_alive()
+    st.session_state.keep_alive_started = True
 
 # --- PAGE CONFIG ---
 st.set_page_config(
@@ -13,7 +20,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# --- CUSTOM CSS FOR PREMIUM LOOK ---
+# --- CUSTOM CSS FOR PREMIUM LOOK + WAKE-UP SPLASH ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono&display=swap');
@@ -172,6 +179,83 @@ st.markdown("""
             font-size: 16px !important;
         }
     }
+
+    /* ── Wake-Up Splash ── */
+    .wakeup-overlay {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 60vh;
+        text-align: center;
+        padding: 60px 20px;
+    }
+    .wakeup-title {
+        font-size: 2.4rem;
+        font-weight: 800;
+        color: #FF3131;
+        margin-bottom: 12px;
+        letter-spacing: -1px;
+    }
+    .wakeup-sub {
+        font-size: 1.1rem;
+        color: #F5F5DC;
+        opacity: 0.75;
+        margin-bottom: 32px;
+        font-weight: 300;
+    }
+    .wakeup-bar-wrap {
+        width: 280px;
+        height: 6px;
+        background: rgba(255,255,255,0.08);
+        border-radius: 999px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+    .wakeup-bar {
+        height: 100%;
+        width: 40%;
+        background: linear-gradient(90deg, #FF3131, #ff6b6b);
+        border-radius: 999px;
+        animation: slide 1.4s ease-in-out infinite;
+    }
+    @keyframes slide {
+        0%   { transform: translateX(-100%); }
+        100% { transform: translateX(800%); }
+    }
+    .wakeup-note {
+        font-size: 0.82rem;
+        color: #888;
+        max-width: 340px;
+        line-height: 1.6;
+    }
+
+    /* ── Status Badge ── */
+    .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        border-radius: 20px;
+        background: rgba(0,255,120,0.08);
+        border: 1px solid rgba(0,255,120,0.2);
+        color: #00ff78;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        margin-top: 6px;
+    }
+    .status-dot {
+        width: 8px;
+        height: 8px;
+        background: #00ff78;
+        border-radius: 50%;
+        animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50%       { opacity: 0.4; transform: scale(0.7); }
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -181,7 +265,16 @@ with st.sidebar:
     show_sources = st.toggle("Show Reference Sources", value=False, help="Toggle to see which files were used for the answer.")
     
     st.divider()
-    
+
+    # Live status badge
+    st.markdown("""
+        <div class="status-badge">
+            <div class="status-dot"></div>
+            SYSTEM ONLINE
+        </div>
+    """, unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
+
     st.info("Vector Index: **Verified**")
     st.info("Intelligence: **Llama 3.1**")
     
@@ -200,6 +293,31 @@ st.markdown("""
 # --- ASSETS ---
 ASSETS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
 USER_AVATAR = os.path.join(ASSETS_DIR, "user_avatar.png")
+
+# --- WAKE-UP SPLASH (shown only on very first load, then auto-dismissed) ---
+if "app_ready" not in st.session_state:
+    st.session_state.app_ready = False
+
+if not st.session_state.app_ready:
+    splash = st.empty()
+    with splash.container():
+        st.markdown("""
+        <div class="wakeup-overlay">
+            <div class="wakeup-title">⚡ Intelligence Nexus</div>
+            <div class="wakeup-sub">Waking up the system. Ready in a moment...</div>
+            <div class="wakeup-bar-wrap">
+                <div class="wakeup-bar"></div>
+            </div>
+            <div class="wakeup-note">
+                🚀 The system is initializing the AI engine and loading the vector index.<br>
+                This only happens once. All future responses will be instant.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    time.sleep(2)          # Brief pause to show the splash
+    st.session_state.app_ready = True
+    splash.empty()         # Clear the splash — show normal UI
+    st.rerun()
 
 # Initialize chat history
 if "messages" not in st.session_state:
